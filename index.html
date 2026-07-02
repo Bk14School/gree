@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ค่ายเยาวชนรักพงไพร | Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div><p class="eyebrow">ระบบคะแนนกิจกรรมฐาน</p><h1>ค่ายเยาวชนรักพงไพร</h1></div>
+      <nav class="nav" aria-label="เมนูหลัก">
+        <button class="nav-btn active" data-view="dashboard">คะแนนรวม</button>
+        <button class="nav-btn" data-view="score">ให้ดาว</button>
+        <button class="nav-btn" data-view="gallery">แกลอรี่</button>
+        <button class="nav-btn" data-view="admin">ตั้งค่า</button>
+      </nav>
+    </header>
+    <main>
+      <section id="dashboard" class="view active">
+        <div class="hero-board"><div><p class="eyebrow">Live Scoreboard</p><h2>คะแนนดาวแต่ละกลุ่ม</h2></div><div class="summary-pills"><span><strong id="groupCount">0</strong> กลุ่ม</span><span><strong id="stationCount">0</strong> ฐาน</span><span><strong id="photoCount">0</strong> ภาพ</span></div></div>
+        <div id="scoreGrid" class="score-grid"></div>
+      </section>
+      <section id="score" class="view">
+        <div class="work-layout">
+          <aside class="panel"><h2>ครูประจำฐาน</h2><label>รหัสครู 4 หลัก<input id="teacherPin" inputmode="numeric" maxlength="4" placeholder="เช่น 1234"></label><label>เลือกฐาน<select id="stationSelect"></select></label><label>เลือกกลุ่ม<select id="groupSelect"></select></label><button id="teacherLogin" class="primary">เข้าสู่หน้าให้ดาว</button><p class="hint">เมื่อสแกน QR ของกลุ่ม ลิงก์จะพามาหน้านี้และเลือกกลุ่มให้อัตโนมัติ</p></aside>
+          <section class="panel scoring-panel"><div class="score-head"><div><p class="eyebrow">กำลังให้คะแนน</p><h2 id="scoreGroupName">เลือกกลุ่มก่อน</h2></div><div class="big-stars" id="scoreGroupStars">0 ★</div></div><div class="stepper"><button id="minusStar" aria-label="ลดดาว">−</button><output id="starDelta">1</output><button id="plusStar" aria-label="เพิ่มดาว">+</button></div><label>เหตุผล/พฤติกรรม<select id="reasonSelect"><option value="ร่วมมือดี">ร่วมมือดี</option><option value="มีน้ำใจช่วยเพื่อน">มีน้ำใจช่วยเพื่อน</option><option value="ตอบคำถามได้ดี">ตอบคำถามได้ดี</option><option value="รักษาความสะอาด">รักษาความสะอาด</option><option value="ไม่ทำตามกติกา">ไม่ทำตามกติกา</option><option value="รบกวนกิจกรรม">รบกวนกิจกรรม</option><option value="custom">พิมพ์เอง</option></select></label><label id="customReasonWrap" class="hidden">ข้อความเพิ่มเติม<textarea id="customReason" rows="3" placeholder="ใส่รายละเอียดสั้น ๆ"></textarea></label><label>อัปโหลดรูปประกอบ<input id="photoInput" type="file" accept="image/*"></label><button id="submitScore" class="primary">บันทึกคะแนน</button><div id="scoreMessage" class="message"></div></section>
+        </div>
+      </section>
+      <section id="gallery" class="view"><div class="section-head"><div><p class="eyebrow">Camp Gallery</p><h2>แกลอรี่ภาพกิจกรรม</h2></div><select id="galleryFilter" aria-label="กรองรูปภาพ"></select></div><div id="galleryGrid" class="gallery-grid"></div></section>
+      <section id="admin" class="view"><div id="adminGate" class="login-card"><h2>เข้าสู่หน้าตั้งค่า</h2><label>รหัสแอดมิน<input id="adminPin" inputmode="numeric" maxlength="4" placeholder="9999"></label><button id="adminLogin" class="primary">เข้าสู่ระบบ</button></div><div id="adminPanel" class="admin-grid hidden"><section class="panel"><h2>สร้างกลุ่ม</h2><label>ชื่อกลุ่ม<input id="newGroupName" placeholder="เช่น กลุ่มไทรทอง"></label><label>สีประจำกลุ่ม<input id="newGroupColor" type="color" value="#12805c"></label><button id="addGroup" class="primary">เพิ่มกลุ่ม</button></section><section class="panel"><h2>ฐานกิจกรรมและรหัสครู</h2><label>ชื่อฐาน<input id="newStationName" placeholder="เช่น ฐานสำรวจพืช"></label><label>รหัสครู 4 หลัก<input id="newStationPin" inputmode="numeric" maxlength="4" placeholder="1234"></label><button id="addStation" class="primary">เพิ่มฐาน</button></section><section class="panel wide"><div class="section-head compact"><h2>QR ประจำกลุ่ม</h2><button id="printQr">พิมพ์ QR</button></div><div id="qrGrid" class="qr-grid"></div></section><section class="panel wide"><h2>ประวัติคะแนนล่าสุด</h2><div id="logList" class="log-list"></div></section></div></section>
+    </main>
+  </div>
+  <script src="config.js"></script><script src="app.js"></script>
+</body>
+</html>
